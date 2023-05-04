@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>인증 게시판 상세 조회</title>
@@ -37,10 +38,12 @@
     <div id="contentsDiv">
         <img src="<%=request.getContextPath()%>/uploads/${mission.fileName}" onerror="this.src='<%=request.getContextPath()%>/images/missionDefault.png'" width="600">
         <p>${mission.content}</p>
-        <div id="buttonDiv">
-            <button type="button" class="btn btn-primary" onclick="location.href='/board/mission/update/${mission.boardSeq}'">수정하기</button>
-            <button type="button" class="btn btn-primary" onclick="confirmDelete(${mission.boardSeq})">삭제하기</button>
-        </div>
+        <c:if test="${currentUser.getUserSeq() == board.userSeq}">
+            <div id="buttonDiv">
+                <button type="button" class="btn btn-primary" onclick="location.href='/board/mission/update/${mission.boardSeq}'">수정하기</button>
+                <button type="button" class="btn btn-primary" onclick="confirmDelete(${mission.boardSeq})">삭제하기</button>
+            </div>
+        </c:if>
     </div>
 
 
